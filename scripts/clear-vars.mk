@@ -1,0 +1,43 @@
+_clear_vars_inc := 1
+
+MODULE :=
+module :=
+module_path :=
+module_subdirs :=
+module_cobjs :=
+module_cflags :=
+module_cxxobjs :=
+module_cxxflags :=
+module_depencies :=
+module_link_path :=
+module_link_libs :=
+module_c_includes :=
+module_cxx_includes :=
+module_version :=
+
+cobjs-y :=
+cxxobjs-y :=
+subdirs-y :=
+lib-y :=
+inc-y :=
+dep-y :=
+cflags-y :=
+cxxflags-y :=
+_cobjs :=
+_cxxobjs :=
+_target :=
+_major :=
+_subdirs :=
+_subdir_targets :=
+_cleanobjs :=
+_targets :=
+
+dir-y :=
+dir-m :=
+_dirs_y :=
+_dir_files_y :=
+_dir_files_m :=
+_dirs_m :=
+_dir_files_m :=
+_dir_objs :=
+_dir_files :=

@@ -1,0 +1,4 @@
+config XBUSTOOL
+	bool "xbus tool"
+	depends on XBUS_STATIC
+	default n

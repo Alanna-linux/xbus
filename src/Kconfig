@@ -1,0 +1,7 @@
+config XBUS_CORE
+	bool "xbus core"
+	default y
+
+config MEMORY_DEBUG
+	bool "debug memory usage"
+	default y

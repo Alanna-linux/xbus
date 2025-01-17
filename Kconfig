@@ -1,0 +1,30 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt.
+#
+mainmenu "Kconfig Configuration"
+
+config XBUS
+	bool "xbus"
+
+if XBUS
+
+choice
+	prompt "build shared or static library"
+	default XBUS_SHARED
+
+config XBUS_SHARED
+	bool "build shared library"
+
+config XBUS_STATIC
+	bool "build static library"
+
+endchoice
+
+config SANITIZE_ADDRESS
+	bool "enable gcc sanitize address function"
+
+source src/Kconfig
+source tools/Kconfig
+
+endif

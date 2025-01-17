@@ -1,0 +1,77 @@
+WHAT IS XBUS?
+-------------
+
+As we all known, ROS is too complicated, we need a simple and easy library
+to communicate between nodes, so the xbus is born. XBUS is a library that
+supports communication between processes or threads on linux platform. XBUS
+supports single publisher to single subscriber, single publisher to multi
+subscriber, multi publishers to single subscriber, multi publishers to multi
+subscribers.
+
+-------- 						--------
++ pub0 + ----				      --->	+ sub0 +
+--------    ----			   ----		--------
+	        ----			----
+-------- 	   --->	------------ ----		--------
++ pub1 + ------------>	+ schedule + ------------->	+ sub1 +
+-------- 	  --->	------------ ----		--------
+               ---- 			----
+--------    ----			   ----		--------
++ pub2 + ---- 				      ---->	+ sub2 +
+-------- 						--------
+
+
+How To Build
+------------
+
+There need three procedures to build XBUS, follow below commands:
+1. make xxx_defconfig O=[build dir]
+2. cd [build dir]; make -jN
+3. make install
+
+After all, the libxbus.so and all binary files would be installed to the [build
+dir]/out path.
+
+
+Publish flow detail
+-------------------
+
+pub node 						  xbus
+-------- 						--------
+   |							    |
+xbus_init						    |
+   | 							    |
+   |<------------- NODE_CMD_DISTRIBUTE_ID ------------------|
+   | 							    |
+xbus_pub_init 						    |
+   | 							    |
+   |-------------- XBUS_CMD_PUB_TOPIC --------------------->|
+   | 							    |
+   |<------------- NODE_CMD_TOPIC_ID -----------------------|
+   | 							    |
+   | 						if any subscribers match
+   | 		   NODE_CMD_TCP_LINK 			    |
+sub node<--------- NODE_CMD_UNIX_LINK ----------------------|
+   | 		   NODE_CMD_NEW_EVENT			    |
+   | 							    |
+wait for sub node connection				    |
+   | 							    |
+wait BP_CMD_SUSCRIBE cmd				    |
+   | 							    |
+
+
+TCP flow detail
+---------------
+
+sub node 		  xbus 			pub node
+-------- 	       -------- 		--------
+   | 			   |    		    |
+   | 			   |    		    |
+   | 			   |-- NODE_CMD_REQ_PORT -->|
+   | 			   |    		    |
+   |                       |<-- XBUS_CMD_TCP_PORT --|
+   | 			   |    		    |
+   |<- NODE_CMD_TCP_LINK --|    		    |
+   | 			   |    		    |
+   |-------------- BP_CMD_SUSCRIBE ---------------->|
+   | 			   |    		    |
