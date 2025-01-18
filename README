@@ -25,12 +25,22 @@ How To Build
 ------------
 
 There need three procedures to build XBUS, follow below commands:
-1. make xxx_defconfig O=[build dir]
+1. make x86_defconfig O=build-x86
 2. cd [build dir]; make -jN
 3. make install
 
 After all, the libxbus.so and all binary files would be installed to the [build
 dir]/out path.
+
+
+Usage
+-----
+
+1. running the xbus master service
+   mkdir /run/xbus2
+   create the /run/xbus2 directory if /run/xbus2 is not exist.
+   ./out/usr/bin/xbus-daemon &
+2. After the xbus service is running, you can use the xbus APIs to test.
 
 
 Publish flow detail
